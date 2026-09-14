@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProductDetail from '../../components/ProductDetail.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import AdvisorCTA from '../../components/AdvisorCTA.astro';
+import Footer from '../../components/Footer.astro';
+
+const lines = [
+  {
+    icon: 'heart',
+    eyebrow: 'Protege el futuro de quienes más quieres',
+    title: 'Seguro de Vida',
+    description:
+      'Un seguro de vida es la decisión más importante que puedes tomar por tu familia. En Prever Seguros te ofrecemos planes flexibles que garantizan el bienestar de tus seres queridos ante cualquier imprevisto.',
+    features: [
+      'Cobertura por fallecimiento natural o accidental',
+      'Indemnización por invalidez total y permanente',
+      'Enfermedades graves cubiertas desde el diagnóstico',
+      'Planes desde $50.000 mensuales',
+      'Sin exámenes médicos para montos básicos',
+    ],
+    ctaLabel: 'Cotizar seguro de vida',
+    ctaHref: '/cotizar?linea=vida',
+  },
+  {
+    icon: 'shield',
+    eyebrow: 'Atención médica sin preocupaciones',
+    title: 'Seguro de Salud',
+    description:
+      'Accede a atención médica de calidad cuando la necesites, sin depender únicamente del sistema tradicional. Cuidamos de ti y de tu familia con una red amplia de aliados médicos.',
+    features: [
+      'Consultas médicas ilimitadas',
+      'Descuentos en medicamentos y exámenes',
+      'Atención domiciliaria disponible',
+      'Red nacional de clínicas y hospitales',
+      'Cobertura de urgencias 24/7',
+    ],
+    ctaLabel: 'Cotizar seguro de salud',
+    ctaHref: '/cotizar?linea=salud',
+    reverse: true,
+  },
+  {
+    icon: 'car',
+    eyebrow: 'Maneja con tranquilidad',
+    title: 'Seguro de Vehículos',
+    description:
+      'Cubrimos tu vehículo ante accidentes, robo y responsabilidad civil, para que manejes con la confianza de estar respaldado en cualquier imprevisto en la vía.',
+    features: [
+      'Cobertura todo riesgo',
+      'Asistencia en carretera 24/7',
+      'Carro sustituto mientras reparan el tuyo',
+      'Responsabilidad civil extracontractual',
+      'Descuentos por buen historial de conducción',
+    ],
+    ctaLabel: 'Cotizar seguro de vehículo',
+    ctaHref: '/cotizar?linea=auto',
+  },
+  {
+    icon: 'briefcase',
+    eyebrow: 'Protege tu negocio y tu equipo',
+    title: 'Seguro Empresarial',
+    description:
+      'Diseñamos planes escalables que protegen los activos, la infraestructura y el equipo humano de tu empresa, sin importar su tamaño o sector.',
+    features: [
+      'Cobertura de activos e infraestructura',
+      'Seguro colectivo de vida para empleados',
+      'Responsabilidad civil de la empresa',
+      'Planes escalables según el tamaño del negocio',
+      'Asesoría personalizada para tu sector',
+    ],
+    ctaLabel: 'Cotizar seguro empresarial',
+    ctaHref: '/cotizar?linea=empresarial',
+    reverse: true,
+  },
+];
+---
+
+<Layout title="Productos · Prever Seguros" description="Conoce nuestras líneas de seguros: vida, salud, vehículos y empresarial.">
+  <Header />
+  <PageHero
+    eyebrow="Nuestros seguros"
+    title="Cobertura para cada momento de tu vida"
+    subtitle="Diseñamos soluciones que se adaptan a ti, tu familia y tu empresa. Encuentra el seguro que necesitas con respaldo real y atención cercana."
+  />
+
+  {lines.map((line) => <ProductDetail {...line} />)}
+
+  <HowItWorks />
+<AdvisorCTA />
+  <Footer />
+</Layout>

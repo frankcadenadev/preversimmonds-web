@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  title = '¿No sabes cuál seguro necesitas?',
+  subtitle = 'Nuestros asesores te orientan sin costo y sin compromiso. Encuentra la cobertura ideal para tu situación.',
+  ctaLabel = 'Hablar con un asesor',
+  ctaHref = '/contacto',
+} = Astro.props;
+---
+
+<section class="advisor-cta">
+  <div class="container">
+    <h2>{title}</h2>
+    <p>{subtitle}</p>
+    <a href={ctaHref} class="btn btn-primary">
+      {ctaLabel}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .advisor-cta {
+    background: var(--navy-700);
+    padding: 88px 0;
+    text-align: center;
+  }
+
+  .advisor-cta h2 {
+    color: var(--white);
+    font-size: 32px;
+    max-width: 640px;
+    margin: 0 auto 16px;
+  }
+
+  .advisor-cta p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  @media (max-width: 640px) {
+    .advisor-cta h2 {
+      font-size: 26px;
+    }
+  }
+</style>

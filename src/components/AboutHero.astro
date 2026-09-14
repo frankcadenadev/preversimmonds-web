@@ -1,0 +1,70 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+}
+const { eyebrow, title, description } = Astro.props;
+---
+
+<section class="about-hero">
+  <div class="container about-hero-grid">
+    <div class="about-hero-content">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="description">{description}</p>
+    </div>
+    <div class="about-hero-image">
+      <!-- Placeholder: reemplazar por fotografía real del equipo/oficina -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero {
+    background: var(--navy-700);
+    padding: 72px 0;
+  }
+
+  .about-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .about-hero-content .eyebrow {
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .about-hero-content h1 {
+    color: var(--white);
+    font-size: 42px;
+    margin-bottom: 20px;
+  }
+
+  .about-hero-content .description {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 16px;
+    max-width: 460px;
+  }
+
+  .about-hero-image {
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #3a4a68, var(--navy-900));
+  }
+
+  @media (max-width: 860px) {
+    .about-hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-hero-content h1 {
+      font-size: 32px;
+    }
+  }
+</style>

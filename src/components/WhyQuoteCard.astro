@@ -1,0 +1,58 @@
+---
+const reasons = [
+  'Respuesta en menos de 24 horas',
+  'Asesoría personalizada sin costo',
+  'Comparamos las mejores opciones del mercado',
+  'Sin compromisos ni letra pequeña',
+];
+---
+
+<div class="why-quote-card">
+  <h3>¿Por qué cotizar con nosotros?</h3>
+  <ul>
+    {reasons.map((reason) => (
+      <li>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="rgba(232,134,46,0.18)" />
+          <path d="M8 12.5l2.5 2.5L16 9.5" stroke="var(--orange-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>{reason}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .why-quote-card {
+    background: var(--navy-700);
+    border-radius: 20px;
+    padding: 32px;
+  }
+
+  .why-quote-card h3 {
+    color: var(--white);
+    font-size: 19px;
+    margin-bottom: 20px;
+  }
+
+  .why-quote-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .why-quote-card li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14.5px;
+  }
+
+  .why-quote-card svg {
+    flex-shrink: 0;
+  }
+</style>

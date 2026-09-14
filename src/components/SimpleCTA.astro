@@ -1,0 +1,56 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  title = '¿Quieres hacer parte de nuestra historia?',
+  subtitle = 'Únete a las miles de familias y empresas que ya confían en Prever Seguros para proteger lo que más importa.',
+  ctaLabel = 'Cotizar ahora',
+  ctaHref = '/cotizar',
+} = Astro.props;
+---
+
+<section class="simple-cta">
+  <div class="container">
+    <h2>{title}</h2>
+    <p>{subtitle}</p>
+    <a href={ctaHref} class="btn btn-primary">
+      {ctaLabel}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .simple-cta {
+    background: var(--gray-100);
+    padding: 88px 0;
+    text-align: center;
+  }
+
+  .simple-cta h2 {
+    color: var(--navy-800);
+    font-size: 32px;
+    max-width: 640px;
+    margin: 0 auto 16px;
+  }
+
+  .simple-cta p {
+    color: var(--gray-600);
+    font-size: 16px;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  @media (max-width: 640px) {
+    .simple-cta h2 {
+      font-size: 26px;
+    }
+  }
+</style>

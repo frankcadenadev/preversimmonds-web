@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactInfoCard from '../components/ContactInfoCard.astro';
+import WhyQuoteCard from '../components/WhyQuoteCard.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Contacto · Prever Seguros" description="Habla con un asesor de Prever Seguros o solicita tu cotización personalizada.">
+  <Header />
+
+  <PageHero
+    eyebrow="Contacto"
+    title="Hablemos sobre tu protección"
+    subtitle="Cuéntanos qué necesitas y un asesor te contactará en menos de 24 horas. Sin compromisos, sin letra pequeña."
+  />
+
+  <section class="contact-section">
+    <div class="container contact-grid">
+      <div class="contact-left">
+        <ContactInfoCard />
+        <WhyQuoteCard />
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-section {
+    background: var(--gray-100);
+    padding: 72px 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .contact-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

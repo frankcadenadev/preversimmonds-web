@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteWizard from '../components/QuoteWizard.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Cotizar · Prever Seguros" description="Cotiza tu seguro en minutos con Prever Seguros.">
+  <Header />
+
+  <PageHero
+    eyebrow="Cotizar"
+    title="Cotiza tu seguro en minutos"
+    subtitle="Responde unas pocas preguntas y te enviamos una propuesta personalizada."
+  />
+
+  <section class="wizard-section">
+    <div class="container">
+      <QuoteWizard />
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .wizard-section {
+    background: var(--gray-100);
+    padding: 72px 0;
+  }
+</style>

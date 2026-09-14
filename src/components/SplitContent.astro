@@ -1,0 +1,86 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  paragraphs: string[];
+  reverse?: boolean;
+}
+const { eyebrow, title, paragraphs, reverse = false } = Astro.props;
+---
+
+<section class={`split-content ${reverse ? 'is-reverse' : ''}`}>
+  <div class="container split-grid">
+    <div class="split-image">
+      <!-- Placeholder: reemplazar por fotografía real -->
+    </div>
+    <div class="split-text">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      {paragraphs.map((paragraph) => (
+        <p class="body-paragraph">{paragraph}</p>
+      ))}
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .split-content {
+    padding: 88px 0;
+    background: var(--white);
+  }
+
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .is-reverse .split-grid {
+    direction: rtl;
+  }
+
+  .is-reverse .split-grid > * {
+    direction: ltr;
+  }
+
+  .split-image {
+    aspect-ratio: 4 / 3;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--navy-700), var(--navy-900));
+  }
+
+  .split-text .eyebrow {
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .split-text h2 {
+    color: var(--navy-800);
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .body-paragraph {
+    color: var(--gray-600);
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .body-paragraph:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .split-grid {
+      grid-template-columns: 1fr;
+    }
+    .is-reverse .split-grid {
+      direction: ltr;
+    }
+  }
+</style>

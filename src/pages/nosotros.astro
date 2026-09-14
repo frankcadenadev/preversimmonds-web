@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import AboutHero from '../components/AboutHero.astro';
+import SplitContent from '../components/SplitContent.astro';
+import Footer from '../components/Footer.astro';
+import ValuesGrid from '../components/ValuesGrid.astro';
+import TeamSection from '../components/TeamSection.astro';
+import SimpleCTA from '../components/SimpleCTA.astro';
+---
+
+<Layout title="Nosotros · Prever Seguros" description="Conoce la historia de Prever Seguros y por qué somos el aliado indicado para proteger lo que más importa.">
+  <Header />
+
+  <AboutHero
+    eyebrow="Sobre nosotros"
+    title="Más de 15 años protegiendo lo que importa"
+    description="Nacimos con una convicción: que cada colombiano merece acceder a seguros claros, confiables y pensados para su realidad."
+  />
+
+  <SplitContent
+    eyebrow="Nuestra historia"
+    title="De una idea a miles de familias protegidas"
+    paragraphs={[
+      'Prever Seguros nació en 2009 en Bogotá, fundada por un grupo de asesores con más de una década de experiencia en el sector asegurador colombiano. Vimos de cerca cómo muchas familias quedaban desprotegidas por pólizas que no entendían o que no se ajustaban a su realidad económica.',
+      'Decidimos construir una empresa diferente: una donde el cliente siempre entienda qué está comprando, donde el asesor es un aliado de largo plazo y donde la atención no termina en la venta sino que empieza ahí.',
+      'Hoy acompañamos a más de 50.000 familias y empresas en todo el país, con presencia en las principales ciudades de Colombia y un equipo de asesores comprometidos con brindar claridad, respaldo y tranquilidad en cada etapa del camino.',
+    ]}
+  />
+
+  <ValuesGrid />
+<TeamSection />
+<SimpleCTA />
+
+<!-- Próximas secciones: equipo, etc. -->
+
+  <Footer />
+</Layout>

@@ -1,0 +1,101 @@
+---
+const steps = [
+  {
+    number: '01',
+    title: 'Cuéntanos qué necesitas',
+    description: 'Habla con uno de nuestros asesores o completa el formulario. Sin compromisos, sin letra pequeña.',
+  },
+  {
+    number: '02',
+    title: 'Recibe tu cotización',
+    description: 'En menos de 24 horas te enviamos una propuesta personalizada con las mejores opciones para ti.',
+  },
+  {
+    number: '03',
+    title: 'Elige y activa tu seguro',
+    description: 'Selecciona el plan que más te convenga y actívalo de forma inmediata. Así de sencillo.',
+  },
+];
+---
+
+<section class="how-it-works">
+  <div class="container">
+    <div class="how-heading">
+      <p class="eyebrow">¿Cómo funciona?</p>
+      <h2>Asegurarte es más fácil de lo que crees</h2>
+    </div>
+
+    <div class="steps-grid">
+      {steps.map((step) => (
+        <div class="step-card">
+          <p class="step-number">{step.number}</p>
+          <h3>{step.title}</h3>
+          <p class="step-description">{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    background: var(--gray-100);
+    padding: 88px 0;
+  }
+
+  .how-heading {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 48px;
+  }
+
+  .how-heading .eyebrow {
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .how-heading h2 {
+    color: var(--navy-800);
+    font-size: 32px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .step-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 32px 28px;
+    box-shadow: 0 12px 28px rgba(16, 26, 48, 0.06);
+  }
+
+  .step-number {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 30px;
+    color: rgba(232, 134, 46, 0.35);
+    margin-bottom: 16px;
+  }
+
+  .step-card h3 {
+    color: var(--navy-800);
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+
+  .step-description {
+    color: var(--gray-600);
+    font-size: 15px;
+  }
+
+  @media (max-width: 860px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

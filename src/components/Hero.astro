@@ -1,0 +1,98 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-bg" role="img" aria-label="Familia en su hogar, protegida por sus seguros"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="container hero-content">
+    <p class="eyebrow">Tu tranquilidad, nuestra misión</p>
+    <h1>Protege lo que más importa en tu vida</h1>
+    <p class="lead">
+      En Prever Seguros te acompañamos con soluciones pensadas para ti, tu familia y tu empresa.
+      Cobertura real, atención cercana.
+    </p>
+    <div class="hero-actions">
+      <a href="/cotizar" class="btn btn-primary">
+        Cotizar ahora
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+      <a href="/nosotros" class="btn btn-secondary">Conocer más</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /*
+    Placeholder visual: reemplazar por la fotografía real de la empresa
+    (familia en casa) cuando la proporcionen. Por ahora se usa un degradado
+    en los mismos tonos de marca para conservar la composición del diseño.
+  */
+  .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/fondof.png');
+  background-size: cover;
+  background-position: center;
+}
+
+  .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(16, 26, 48, 0.92) 0%, rgba(16, 26, 48, 0.55) 55%, rgba(16, 26, 48, 0.15) 100%);
+}
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .eyebrow {
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    color: var(--white);
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .lead {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 17px;
+    max-width: 480px;
+    margin-bottom: 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 {
+      font-size: 34px;
+    }
+    .hero-content {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+  }
+</style>
