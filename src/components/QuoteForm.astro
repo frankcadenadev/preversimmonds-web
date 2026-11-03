@@ -1,16 +1,12 @@
 ---
-const insuranceTypes = ['Seguro de Vida', 'Seguro de Salud', 'Seguro de Vehículos', 'Seguro Empresarial', 'No estoy seguro / quiero asesoría'];
+import { categories, insurancesByCategory } from '../data/seguros';
 ---
 
 <div class="quote-form-card">
   <h3>Solicita tu cotización</h3>
   <p class="form-subtitle">Completa el formulario y te enviamos una propuesta personalizada.</p>
 
-  <!--
-    TODO: este formulario todavía no envía datos a ningún lado.
-    Falta decidir el destino (correo, CRM, backend propio) antes de conectarlo.
-  -->
-  <form class="quote-form">
+  <form class="quote-form" data-quote-form>
     <div class="form-row">
       <div class="form-field">
         <label for="name">Nombre completo <span class="required">*</span></label>
@@ -31,9 +27,14 @@ const insuranceTypes = ['Seguro de Vida', 'Seguro de Salud', 'Seguro de Vehícul
         <label for="insurance-type">Tipo de seguro <span class="required">*</span></label>
         <select id="insurance-type" name="insurance-type" required>
           <option value="" selected disabled>Selecciona un seguro</option>
-          {insuranceTypes.map((type) => (
-            <option value={type}>{type}</option>
+          {categories.map((category) => (
+            <optgroup label={category.label}>
+              {insurancesByCategory(category.id).map((item) => (
+                <option value={item.name}>{item.name}</option>
+              ))}
+            </optgroup>
           ))}
+          <option value="No estoy seguro / quiero asesoría">No estoy seguro / quiero asesoría</option>
         </select>
       </div>
     </div>
@@ -43,10 +44,20 @@ const insuranceTypes = ['Seguro de Vida', 'Seguro de Salud', 'Seguro de Vehícul
       <textarea id="message" name="message" rows="4" placeholder="¿Qué necesitas cubrir? ¿Tienes alguna pregunta específica?"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary submit-btn">Enviar solicitud</button>
+    <label class="consent">
+      <input type="checkbox" name="consent" required />
+      <span>
+        Autorizo el tratamiento de mis datos personales conforme a la
+        <a href="/politica" target="_blank" rel="noopener">Política de Tratamiento de Datos Personales</a>.
+        <span class="required">*</span>
+      </span>
+    </label>
 
-    <p class="form-disclaimer">
-      Al enviar este formulario aceptas nuestra <a href="/politica-de-tratamiento-de-datos">política de privacidad</a>. No compartimos tu información con terceros.
+    <button type="submit" class="btn btn-primary submit-btn">Enviar solicitud por WhatsApp</button>
+
+    <p class="form-feedback" data-form-feedback hidden>
+      Abrimos WhatsApp con tu solicitud. Pulsa <strong>enviar</strong> en el chat para que un asesor te responda.
+      ¿No se abrió? <a href="#" data-whatsapp-fallback target="_blank" rel="noopener">Ábrelo aquí</a>.
     </p>
   </form>
 </div>
@@ -137,15 +148,44 @@ const insuranceTypes = ['Seguro de Vida', 'Seguro de Salud', 'Seguro de Vehícul
     padding: 15px 28px;
   }
 
-  .form-disclaimer {
+  .consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
     color: var(--gray-600);
-    font-size: 13px;
-    text-align: center;
-    margin-top: 16px;
+    cursor: pointer;
   }
 
-  .form-disclaimer a {
+  .consent input {
+    margin-top: 3px;
+    accent-color: var(--orange-500);
+    flex-shrink: 0;
+  }
+
+  .consent a {
     color: var(--orange-500);
+    text-decoration: underline;
+  }
+
+  .form-feedback {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(232, 134, 46, 0.1);
+    color: var(--navy-800);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .form-feedback[hidden] {
+    display: none;
+  }
+
+  .form-feedback a {
+    color: var(--orange-500);
+    font-weight: 600;
     text-decoration: underline;
   }
 
@@ -159,3 +199,45 @@ const insuranceTypes = ['Seguro de Vida', 'Seguro de Salud', 'Seguro de Vehícul
     }
   }
 </style>
+
+<script>
+  import { buildWhatsAppUrl } from '../data/contacto';
+
+  function setupQuoteForm() {
+    const form = document.querySelector('[data-quote-form]') as HTMLFormElement | null;
+    if (!form) return;
+
+    const feedback = form.querySelector('[data-form-feedback]') as HTMLElement | null;
+    const fallback = form.querySelector('[data-whatsapp-fallback]') as HTMLAnchorElement | null;
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const value = (key: string) => (data.get(key) ?? '').toString().trim();
+      const phone = value('phone');
+      const message = value('message');
+
+      const url = buildWhatsAppUrl([
+        'Hola, quiero solicitar una cotización.',
+        '',
+        `Seguro: ${value('insurance-type')}`,
+        `Nombre: ${value('name')}`,
+        `Correo: ${value('email')}`,
+        ...(phone ? [`Teléfono: ${phone}`] : []),
+        ...(message ? [`Detalles: ${message}`] : []),
+        '',
+        'Autorizo el tratamiento de mis datos personales según la política de Prever Seguros.',
+      ]);
+
+      window.open(url, '_blank', 'noopener');
+
+      if (fallback) fallback.href = url;
+      if (feedback) feedback.hidden = false;
+      form.reset();
+    });
+  }
+
+  // astro:page-load se dispara en la carga inicial y después de cada navegación (View Transitions)
+  document.addEventListener('astro:page-load', setupQuoteForm);
+</script>

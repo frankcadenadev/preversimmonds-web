@@ -2,92 +2,150 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import PageHero from '../../components/PageHero.astro';
-import ProductDetail from '../../components/ProductDetail.astro';
 import HowItWorks from '../../components/HowItWorks.astro';
 import AdvisorCTA from '../../components/AdvisorCTA.astro';
 import Footer from '../../components/Footer.astro';
-
-const lines = [
-  {
-    icon: 'heart',
-    eyebrow: 'Protege el futuro de quienes más quieres',
-    title: 'Seguro de Vida',
-    description:
-      'Un seguro de vida es la decisión más importante que puedes tomar por tu familia. En Prever Seguros te ofrecemos planes flexibles que garantizan el bienestar de tus seres queridos ante cualquier imprevisto.',
-    features: [
-      'Cobertura por fallecimiento natural o accidental',
-      'Indemnización por invalidez total y permanente',
-      'Enfermedades graves cubiertas desde el diagnóstico',
-      'Planes desde $50.000 mensuales',
-      'Sin exámenes médicos para montos básicos',
-    ],
-    ctaLabel: 'Cotizar seguro de vida',
-    ctaHref: '/cotizar?linea=vida',
-  },
-  {
-    icon: 'shield',
-    eyebrow: 'Atención médica sin preocupaciones',
-    title: 'Seguro de Salud',
-    description:
-      'Accede a atención médica de calidad cuando la necesites, sin depender únicamente del sistema tradicional. Cuidamos de ti y de tu familia con una red amplia de aliados médicos.',
-    features: [
-      'Consultas médicas ilimitadas',
-      'Descuentos en medicamentos y exámenes',
-      'Atención domiciliaria disponible',
-      'Red nacional de clínicas y hospitales',
-      'Cobertura de urgencias 24/7',
-    ],
-    ctaLabel: 'Cotizar seguro de salud',
-    ctaHref: '/cotizar?linea=salud',
-    reverse: true,
-  },
-  {
-    icon: 'car',
-    eyebrow: 'Maneja con tranquilidad',
-    title: 'Seguro de Vehículos',
-    description:
-      'Cubrimos tu vehículo ante accidentes, robo y responsabilidad civil, para que manejes con la confianza de estar respaldado en cualquier imprevisto en la vía.',
-    features: [
-      'Cobertura todo riesgo',
-      'Asistencia en carretera 24/7',
-      'Carro sustituto mientras reparan el tuyo',
-      'Responsabilidad civil extracontractual',
-      'Descuentos por buen historial de conducción',
-    ],
-    ctaLabel: 'Cotizar seguro de vehículo',
-    ctaHref: '/cotizar?linea=auto',
-  },
-  {
-    icon: 'briefcase',
-    eyebrow: 'Protege tu negocio y tu equipo',
-    title: 'Seguro Empresarial',
-    description:
-      'Diseñamos planes escalables que protegen los activos, la infraestructura y el equipo humano de tu empresa, sin importar su tamaño o sector.',
-    features: [
-      'Cobertura de activos e infraestructura',
-      'Seguro colectivo de vida para empleados',
-      'Responsabilidad civil de la empresa',
-      'Planes escalables según el tamaño del negocio',
-      'Asesoría personalizada para tu sector',
-    ],
-    ctaLabel: 'Cotizar seguro empresarial',
-    ctaHref: '/cotizar?linea=empresarial',
-    reverse: true,
-  },
-];
+import { categories, icons, insurancesByCategory } from '../../data/seguros';
 ---
 
-<Layout title="Productos · Prever Seguros" description="Conoce nuestras líneas de seguros: vida, salud, vehículos y empresarial.">
+<Layout title="Productos · Prever Seguros" description="Conoce todos los seguros que gestionamos: personas, vehículos y empresas. Comparamos varias aseguradoras para ti.">
   <Header />
   <PageHero
     eyebrow="Nuestros seguros"
     title="Cobertura para cada momento de tu vida"
-    subtitle="Diseñamos soluciones que se adaptan a ti, tu familia y tu empresa. Encuentra el seguro que necesitas con respaldo real y atención cercana."
+    subtitle="Comparamos varias aseguradoras para encontrar el seguro que necesitas, con respaldo real y atención cercana."
   />
 
-  {lines.map((line) => <ProductDetail {...line} />)}
+  <section class="catalog">
+    <div class="container">
+      {categories.map((category) => (
+        <div class="category" id={category.id}>
+          <div class="category-heading">
+            <h2>{category.label}</h2>
+            <p>{category.description}</p>
+          </div>
+
+          <div class="cards-grid">
+            {insurancesByCategory(category.id).map((item) => (
+              <a href={`/seguros/${item.slug}`} class="insurance-card">
+                <span class="card-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" set:html={icons[item.icon]} />
+                </span>
+                <h3>{item.name}</h3>
+                <p>{item.summary}</p>
+                <span class="card-link">
+                  Ver más
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 
   <HowItWorks />
-<AdvisorCTA />
+  <AdvisorCTA />
   <Footer />
 </Layout>
+
+<style>
+  .catalog {
+    background: var(--gray-100);
+    padding: 72px 0 40px;
+  }
+
+  .category {
+    margin-bottom: 56px;
+    scroll-margin-top: 100px;
+  }
+
+  .category-heading {
+    margin-bottom: 28px;
+  }
+
+  .category-heading h2 {
+    color: var(--navy-800);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .category-heading p {
+    color: var(--gray-600);
+    font-size: 16px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .insurance-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 24px rgba(16, 26, 48, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .insurance-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(16, 26, 48, 0.12);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--navy-700);
+    color: var(--orange-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .insurance-card h3 {
+    color: var(--navy-800);
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+
+  .insurance-card p {
+    color: var(--gray-600);
+    font-size: 14.5px;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  @media (max-width: 1060px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .category-heading h2 {
+      font-size: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,184 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+
+// TODO: confirmar estos datos con Sebastián/Camilo antes de publicar la página.
+const razonSocial = 'Prever Simmonds y CIA Profesionales de Seguros'; // TODO: confirmar razón social exacta
+const nit = 'XXX.XXX.XXX-X'; // TODO: NIT de la empresa
+const correoContacto = 'info@preverseguros.com.co'; // TODO: confirmar correo de contacto
+const telefonoContacto = '601 234 5678'; // TODO: confirmar número real
+const fechaVigencia = 'XX de XXXX de 2026'; // TODO: fecha de publicación/actualización real
+---
+
+<Layout
+  title="Términos y Condiciones · Prever Seguros"
+  description="Términos y condiciones de uso del sitio web de Prever Simmonds y CIA Profesionales de Seguros."
+>
+  <Header />
+
+  <PageHero
+    eyebrow="Legal"
+    title="Términos y Condiciones de Uso"
+    subtitle="Condiciones que aplican al acceso y uso de este sitio web."
+  />
+
+  <section class="legal-section">
+    <div class="container legal-container">
+      <p class="last-updated">Última actualización: {fechaVigencia}</p>
+
+      <p>
+        Este sitio web es operado por <strong>{razonSocial}</strong> (en adelante, "Prever Seguros" o "la
+        empresa"), identificada con NIT {nit}. Al acceder y navegar por este sitio, el usuario acepta los
+        presentes términos y condiciones. Si no está de acuerdo con ellos, le recomendamos no utilizar el sitio.
+      </p>
+
+      <h2>1. Naturaleza informativa del sitio</h2>
+      <p>
+        El contenido de este sitio tiene carácter exclusivamente informativo. La descripción de los seguros, sus
+        coberturas y demás información publicada es orientativa y <strong>no constituye una oferta, una póliza
+        ni un contrato de seguro</strong>. Las coberturas, exclusiones, condiciones y valores definitivos son
+        los establecidos por cada aseguradora en el respectivo contrato de seguro.
+      </p>
+
+      <h2>2. Rol de Prever Seguros</h2>
+      <p>
+        Prever Seguros actúa como intermediario entre el cliente y las compañías aseguradoras, asesorándolo en
+        la búsqueda, comparación y contratación de seguros. La aceptación del riesgo, la expedición de la póliza
+        y el pago de las indemnizaciones corresponden a la aseguradora elegida, conforme a las condiciones de la
+        póliza.
+      </p>
+
+      <h2>3. Cotizaciones y precios</h2>
+      <p>
+        Este sitio no publica precios de seguros, ya que el valor depende de la aseguradora, el plan y las
+        condiciones particulares de cada persona o empresa. Las solicitudes de cotización realizadas a través
+        del sitio no generan ninguna obligación de contratar ni garantizan la aceptación del riesgo por parte de
+        una aseguradora.
+      </p>
+
+      <h2>4. Uso adecuado del sitio</h2>
+      <p>El usuario se compromete a utilizar el sitio de manera lícita y a no:</p>
+      <ul>
+        <li>Suministrar información falsa o de terceros sin su autorización en los formularios.</li>
+        <li>Intentar acceder sin autorización a sistemas, datos o áreas restringidas del sitio.</li>
+        <li>Realizar actividades que afecten el funcionamiento, la seguridad o la disponibilidad del sitio.</li>
+        <li>Usar el contenido del sitio con fines ilícitos o contrarios a estos términos.</li>
+      </ul>
+
+      <h2>5. Información suministrada por el usuario</h2>
+      <p>
+        El usuario es responsable de la veracidad y exactitud de los datos que entrega a través de los
+        formularios. La información inexacta puede afectar la cotización o la expedición de una póliza. El
+        tratamiento de los datos personales se rige por nuestra{' '}
+        <a href="/politica">Política de Tratamiento de Datos Personales</a>.
+      </p>
+
+      <h2>6. Propiedad intelectual</h2>
+      <p>
+        Los textos, imágenes, logotipos, marcas, diseños y demás contenidos de este sitio son propiedad de
+        Prever Seguros o de sus respectivos titulares y están protegidos por las normas de propiedad
+        intelectual. No se permite su reproducción, distribución o uso comercial sin autorización previa y por
+        escrito.
+      </p>
+
+      <h2>7. Enlaces a terceros</h2>
+      <p>
+        El sitio puede contener enlaces a páginas de terceros, como redes sociales o aseguradoras. Prever
+        Seguros no controla ni es responsable del contenido, las políticas o las prácticas de esos sitios.
+      </p>
+
+      <h2>8. Limitación de responsabilidad</h2>
+      <p>
+        Prever Seguros procura mantener la información del sitio actualizada y correcta, pero no garantiza que
+        esté libre de errores u omisiones ni que el sitio funcione de manera ininterrumpida. La empresa no será
+        responsable por decisiones tomadas únicamente con base en la información publicada en el sitio, ni por
+        daños derivados de fallas técnicas ajenas a su control.
+      </p>
+
+      <h2>9. Modificaciones</h2>
+      <p>
+        Prever Seguros podrá modificar estos términos y condiciones en cualquier momento. La versión vigente será
+        la publicada en este sitio, con su fecha de última actualización.
+      </p>
+
+      <h2>10. Ley aplicable</h2>
+      <p>
+        Estos términos se rigen por las leyes de la República de Colombia. Cualquier controversia relacionada
+        con el uso del sitio será resuelta por las autoridades competentes de dicho país.
+      </p>
+
+      <h2>11. Contacto</h2>
+      <p>
+        Para cualquier inquietud sobre estos términos, puede escribirnos a{' '}
+        <a href={`mailto:${correoContacto}`}>{correoContacto}</a> o comunicarse al teléfono {telefonoContacto}.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-section {
+    padding: 64px 0 96px;
+    background: var(--white);
+  }
+
+  .legal-container {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .last-updated {
+    color: var(--gray-600);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .legal-container p {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .legal-container h2 {
+    color: var(--navy-800);
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 14px;
+  }
+
+  .legal-container ul {
+    margin: 0 0 20px;
+    padding-left: 22px;
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  .legal-container li {
+    margin-bottom: 10px;
+  }
+
+  .legal-container a {
+    color: var(--orange-500);
+    font-weight: 600;
+  }
+
+  .legal-container a:hover {
+    color: var(--orange-600);
+  }
+
+  @media (max-width: 640px) {
+    .legal-section {
+      padding: 48px 0 72px;
+    }
+
+    .legal-container h2 {
+      font-size: 20px;
+    }
+  }
+</style>

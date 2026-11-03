@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import Footer from '../components/Footer.astro';
+
+// TODO: confirmar estos datos con Sebastián/Camilo antes de publicar la página.
+const razonSocial = 'Prever Simmonds y CIA Profesionales de Seguros'; // TODO: confirmar razón social exacta como figura en Cámara de Comercio
+const nit = 'XXX.XXX.XXX-X'; // TODO: NIT de la empresa
+const direccion = 'Bogotá D.C., Colombia'; // TODO: dirección física exacta
+const correoContacto = 'info@preverseguros.com.co'; // TODO: confirmar correo destinado a temas de datos personales
+const telefonoContacto = '601 234 5678'; // TODO: confirmar número real
+const fechaVigencia = 'XX de XXXX de 2026'; // TODO: fecha de publicación/actualización real
+---
+
+<Layout
+  title="Política de Tratamiento de Datos Personales · Prever Seguros"
+  description="Política de tratamiento de datos personales de Prever Simmonds y CIA Profesionales de Seguros, conforme a la Ley 1581 de 2012 y sus decretos reglamentarios."
+>
+  <Header />
+
+  <PageHero
+    eyebrow="Legal"
+    title="Política de Tratamiento de Datos Personales"
+    subtitle="Conforme a la Ley 1581 de 2012, el Decreto 1377 de 2013 y demás normas que las modifiquen o complementen."
+  />
+
+  <section class="legal-section">
+    <div class="container legal-container">
+      <p class="last-updated">Última actualización: {fechaVigencia}</p>
+
+      <p>
+        <strong>{razonSocial}</strong> (en adelante, "Prever Seguros" o "la empresa"), identificada con NIT {nit},
+        con domicilio en {direccion}, en cumplimiento de la Ley Estatutaria 1581 de 2012, el Decreto 1377 de 2013
+        y demás normas que los desarrollen, adopta la presente Política de Tratamiento de Datos Personales para
+        garantizar el derecho constitucional que tienen todas las personas a conocer, actualizar y rectificar la
+        información que se haya recolectado sobre ellas en las bases de datos administradas por la empresa.
+      </p>
+
+      <h2>1. Objeto</h2>
+      <p>
+        Esta política regula la forma en que Prever Seguros recolecta, almacena, usa, circula, suprime y en
+        general trata los datos personales de sus clientes, potenciales clientes, proveedores, empleados y
+        demás terceros con quienes tiene o llegue a tener una relación, ya sea a través de este sitio web,
+        formularios físicos, correo electrónico, WhatsApp o cualquier otro canal habilitado por la empresa.
+      </p>
+
+      <h2>2. Responsable del tratamiento</h2>
+      <ul>
+        <li><strong>Razón social:</strong> {razonSocial}</li>
+        <li><strong>NIT:</strong> {nit}</li>
+        <li><strong>Domicilio:</strong> {direccion}</li>
+        <li><strong>Correo electrónico:</strong> <a href={`mailto:${correoContacto}`}>{correoContacto}</a></li>
+        <li><strong>Teléfono:</strong> {telefonoContacto}</li>
+      </ul>
+
+      <h2>3. Definiciones</h2>
+      <p>Para efectos de esta política, se adoptan las definiciones establecidas en la Ley 1581 de 2012:</p>
+      <ul>
+        <li>
+          <strong>Dato personal:</strong> cualquier información vinculada o que pueda asociarse a una o varias
+          personas naturales determinadas o determinables.
+        </li>
+        <li>
+          <strong>Dato sensible:</strong> aquel que afecta la intimidad del titular o cuyo uso indebido puede
+          generar discriminación (por ejemplo, datos de salud, cuando sean necesarios para la expedición de una
+          póliza).
+        </li>
+        <li>
+          <strong>Titular:</strong> persona natural cuyos datos personales sean objeto de tratamiento.
+        </li>
+        <li>
+          <strong>Tratamiento:</strong> cualquier operación sobre datos personales, tal como la recolección,
+          almacenamiento, uso, circulación o supresión.
+        </li>
+        <li>
+          <strong>Autorización:</strong> consentimiento previo, expreso e informado del titular para llevar a
+          cabo el tratamiento de sus datos personales.
+        </li>
+      </ul>
+
+      <h2>4. Datos que recolectamos</h2>
+      <p>
+        Dependiendo del canal y del servicio solicitado, Prever Seguros puede recolectar los siguientes datos:
+      </p>
+      <ul>
+        <li>Datos de identificación: nombre completo, tipo y número de documento de identidad.</li>
+        <li>Datos de contacto: teléfono, correo electrónico, dirección de residencia u oficina.</li>
+        <li>
+          Datos relacionados con la solicitud de cotización o póliza: tipo de seguro de interés, información del
+          bien o riesgo a asegurar (vehículo, inmueble, empresa) y, cuando aplique para la expedición de la
+          póliza, información de salud u otros datos sensibles, los cuales solo se solicitan cuando son
+          estrictamente necesarios y con autorización expresa del titular.
+        </li>
+        <li>Datos de navegación en el sitio web (a través de formularios de contacto y cotización).</li>
+      </ul>
+
+      <h2>5. Finalidades del tratamiento</h2>
+      <p>Los datos personales recolectados serán utilizados para las siguientes finalidades:</p>
+      <ul>
+        <li>Gestionar cotizaciones, expedición, renovación y modificación de pólizas de seguro.</li>
+        <li>Contactar al titular para brindar asesoría comercial y dar respuesta a sus solicitudes.</li>
+        <li>Dar cumplimiento a obligaciones legales y contractuales frente a aseguradoras y entes de control.</li>
+        <li>Enviar información comercial, novedades y ofertas de productos de seguros, cuando el titular lo autorice.</li>
+        <li>Realizar encuestas de satisfacción y mejorar la calidad del servicio.</li>
+        <li>Fines estadísticos e históricos internos de la empresa.</li>
+      </ul>
+
+      <h2>6. Derechos de los titulares</h2>
+      <p>De acuerdo con el artículo 8 de la Ley 1581 de 2012, todo titular de datos personales tiene derecho a:</p>
+      <ul>
+        <li>Conocer, actualizar y rectificar sus datos personales frente a la empresa.</li>
+        <li>Solicitar prueba de la autorización otorgada para el tratamiento de sus datos.</li>
+        <li>
+          Ser informado, previa solicitud, respecto del uso que se le ha dado a sus datos personales.
+        </li>
+        <li>Presentar quejas ante la Superintendencia de Industria y Comercio (SIC) por infracciones a la ley.</li>
+        <li>Revocar la autorización y/o solicitar la supresión del dato, cuando no exista un deber legal o
+          contractual que impida eliminarlo.</li>
+        <li>Acceder de forma gratuita a sus datos personales que hayan sido objeto de tratamiento.</li>
+      </ul>
+
+      <h2>7. Procedimiento para ejercer sus derechos (PQRS)</h2>
+      <p>
+        El titular, sus causahabientes o representante podrá presentar consultas, reclamos, peticiones o
+        solicitudes de actualización, rectificación o supresión de datos a través del correo electrónico{' '}
+        <a href={`mailto:${correoContacto}`}>{correoContacto}</a> o al teléfono {telefonoContacto}, indicando su
+        nombre completo, número de documento, la descripción de los hechos y, si aplica, los documentos que
+        soporten la solicitud.
+      </p>
+      <p>
+        Prever Seguros dará respuesta a las consultas en un término máximo de diez (10) días hábiles y a los
+        reclamos en un término máximo de quince (15) días hábiles, contados a partir del día siguiente a la
+        fecha de recibo, conforme a los plazos establecidos en la ley. Cuando no fuere posible atender el
+        reclamo dentro de dicho término, se informará al interesado los motivos de la demora y la fecha en que
+        se atenderá su reclamo, la cual no podrá superar los ocho (8) días hábiles siguientes al vencimiento del
+        primer término.
+      </p>
+
+      <h2>8. Seguridad de la información</h2>
+      <p>
+        Prever Seguros adopta las medidas técnicas, humanas y administrativas razonables para proteger los
+        datos personales contra pérdida, uso indebido, acceso no autorizado, alteración o divulgación, y exige
+        el mismo nivel de responsabilidad a los terceros (aseguradoras y proveedores) con quienes comparte
+        información en el marco de la prestación del servicio.
+      </p>
+
+      <h2>9. Transferencia y transmisión de datos</h2>
+      <p>
+        Los datos personales podrán ser transmitidos a las compañías aseguradoras con las que Prever Seguros
+        actúa como corredor o agente, únicamente para efectos de la expedición, gestión y renovación de las
+        pólizas contratadas por el titular, así como a las autoridades competentes cuando exista un
+        requerimiento legal.
+      </p>
+
+      <h2>10. Vigencia</h2>
+      <p>
+        Esta política rige a partir de su publicación en este sitio web y permanecerá vigente mientras se
+        mantengan las bases de datos y finalidades descritas. Prever Seguros podrá modificar esta política en
+        cualquier momento, en cuyo caso la nueva versión será publicada en este mismo sitio.
+      </p>
+
+      <h2>11. Contacto</h2>
+      <p>
+        Para cualquier inquietud relacionada con el tratamiento de sus datos personales, puede escribirnos a{' '}
+        <a href={`mailto:${correoContacto}`}>{correoContacto}</a> o comunicarse al teléfono {telefonoContacto}.
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .legal-section {
+    padding: 64px 0 96px;
+    background: var(--white);
+  }
+
+  .legal-container {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .last-updated {
+    color: var(--gray-600);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .legal-container p {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .legal-container h2 {
+    color: var(--navy-800);
+    font-size: 22px;
+    margin-top: 40px;
+    margin-bottom: 14px;
+  }
+
+  .legal-container ul {
+    margin: 0 0 20px;
+    padding-left: 22px;
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  .legal-container li {
+    margin-bottom: 10px;
+  }
+
+  .legal-container a {
+    color: var(--orange-500);
+    font-weight: 600;
+  }
+
+  .legal-container a:hover {
+    color: var(--orange-600);
+  }
+
+  @media (max-width: 640px) {
+    .legal-section {
+      padding: 48px 0 72px;
+    }
+
+    .legal-container h2 {
+      font-size: 20px;
+    }
+  }
+</style>

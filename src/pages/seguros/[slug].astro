@@ -1,0 +1,331 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import PageHero from '../../components/PageHero.astro';
+import Footer from '../../components/Footer.astro';
+import { categories, icons, insurances } from '../../data/seguros';
+
+export function getStaticPaths() {
+  return insurances.map((insurance) => ({
+    params: { slug: insurance.slug },
+    props: { insurance },
+  }));
+}
+
+const { insurance } = Astro.props;
+const category = categories.find((c) => c.id === insurance.category);
+const related = insurances.filter((i) => i.category === insurance.category && i.slug !== insurance.slug).slice(0, 3);
+
+const phone = '601 234 5678'; // TODO: confirmar número real de atención con Sebastián/Camilo
+---
+
+<Layout
+  title={`${insurance.name} · Prever Seguros`}
+  description={insurance.summary}
+>
+  <Header />
+
+  <PageHero eyebrow={category?.label ?? 'Seguros'} title={insurance.name} subtitle={insurance.summary} />
+
+  <section class="detail">
+    <div class="container detail-grid">
+      <div class="detail-main">
+        <p class="intro">{insurance.intro}</p>
+
+        <h2>Qué suele cubrir</h2>
+        <ul class="check-list">
+          {insurance.covers.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2>¿Para quién es?</h2>
+        <ul class="check-list">
+          {insurance.forWhom.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <div class="price-note">
+          <h3>¿Cuánto cuesta?</h3>
+          <p>
+            El valor depende de la aseguradora, el plan y tus condiciones particulares. Comparamos varias
+            aseguradoras por ti y te enviamos una cotización personalizada, sin compromiso.
+          </p>
+        </div>
+
+        <h2>Preguntas frecuentes</h2>
+        <div class="faqs">
+          {insurance.faqs.map((faq) => (
+            <details>
+              <summary>{faq.q}</summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
+        </div>
+
+        <p class="disclaimer">
+          La información es orientativa. Las coberturas, exclusiones y condiciones finales dependen de la
+          aseguradora y del plan elegido.
+        </p>
+      </div>
+
+      <aside class="quote-card">
+        <span class="quote-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" set:html={icons[insurance.icon]} />
+        </span>
+        <h3>Cotiza {insurance.name}</h3>
+        <p>Un asesor te contactará en menos de 24 horas con opciones de varias aseguradoras.</p>
+        <a href={`/cotizar?linea=${insurance.slug}`} class="btn btn-primary">Solicitar cotización</a>
+        <a href={`tel:${phone.replace(/\D/g, '')}`} class="quote-phone">O llámanos: {phone}</a>
+      </aside>
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="related">
+      <div class="container">
+        <h2>Otros seguros de {category?.label.toLowerCase()}</h2>
+        <div class="related-grid">
+          {related.map((item) => (
+            <a href={`/seguros/${item.slug}`} class="related-card">
+              <h3>{item.name}</h3>
+              <p>{item.summary}</p>
+              <span class="related-link">Ver más →</span>
+            </a>
+          ))}
+        </div>
+        <p class="back-link"><a href="/seguros">← Ver todos los seguros</a></p>
+      </div>
+    </section>
+  )}
+
+  <Footer />
+</Layout>
+
+<style>
+  .detail {
+    padding: 64px 0 72px;
+    background: var(--white);
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .intro {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .detail-main h2 {
+    color: var(--navy-800);
+    font-size: 24px;
+    margin: 36px 0 16px;
+  }
+
+  .check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .check-list li {
+    position: relative;
+    padding-left: 30px;
+    color: var(--ink);
+    font-size: 15.5px;
+  }
+
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(232, 134, 46, 0.15)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 12.5l4 4 8-9' stroke='%23e8862e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 12px no-repeat;
+  }
+
+  .price-note {
+    background: var(--gray-100);
+    border-left: 4px solid var(--orange-500);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-top: 40px;
+  }
+
+  .price-note h3 {
+    color: var(--navy-800);
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+
+  .price-note p {
+    color: var(--gray-600);
+    font-size: 15px;
+  }
+
+  .faqs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faqs details {
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+
+  .faqs summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--navy-800);
+    font-size: 15.5px;
+  }
+
+  .faqs details p {
+    margin-top: 10px;
+    color: var(--gray-600);
+    font-size: 15px;
+  }
+
+  .disclaimer {
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--gray-600);
+  }
+
+  .quote-card {
+    position: sticky;
+    top: 110px;
+    background: var(--navy-700);
+    color: var(--white);
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: 0 20px 40px rgba(16, 26, 48, 0.15);
+  }
+
+  .quote-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(232, 134, 46, 0.15);
+    color: var(--orange-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .quote-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .quote-card p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    margin-bottom: 22px;
+  }
+
+  .quote-card .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .quote-phone {
+    display: block;
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .quote-phone:hover {
+    color: var(--orange-500);
+  }
+
+  .related {
+    background: var(--gray-100);
+    padding: 64px 0 72px;
+  }
+
+  .related h2 {
+    color: var(--navy-800);
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .related-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(16, 26, 48, 0.06);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .related-card h3 {
+    color: var(--navy-800);
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .related-card p {
+    color: var(--gray-600);
+    font-size: 14px;
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .related-link {
+    color: var(--orange-500);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .back-link {
+    margin-top: 28px;
+  }
+
+  .back-link a {
+    color: var(--navy-800);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .back-link a:hover {
+    color: var(--orange-500);
+  }
+
+  @media (max-width: 900px) {
+    .detail-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .quote-card {
+      position: static;
+      order: -1;
+    }
+
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

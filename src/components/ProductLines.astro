@@ -4,7 +4,7 @@ const products = [
     title: 'Seguro de Vida',
     description:
       'Protege el futuro de tu familia con una cobertura que les da tranquilidad cuando más lo necesitan.',
-    href: '/seguros/vida',
+    href: '/seguros/vida-individual',
     icon: 'heart',
   },
   {
@@ -18,14 +18,14 @@ const products = [
     title: 'Seguro de Vehículos',
     description:
       'Maneja con confianza. Cubrimos tu vehículo ante accidentes, robo y responsabilidad civil.',
-    href: '/seguros/auto',
+        href: '/seguros#vehiculos',
     icon: 'car',
   },
   {
     title: 'Seguro Empresarial',
     description:
       'Protege tu negocio, tus activos y a tu equipo con planes diseñados para empresas de todo tamaño.',
-    href: '/seguros/empresariales',
+    href: '/seguros#empresas',
     icon: 'briefcase',
   },
 ];
@@ -192,21 +192,26 @@ const icons: Record<string, string> = {
 </style>
 
 <script>
-  const cards = document.querySelectorAll('.product-card.reveal');
+  function setupProductReveal() {
+    const cards = document.querySelectorAll('.product-card.reveal');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-  cards.forEach((card) => observer.observe(card));
+    cards.forEach((card) => observer.observe(card));
+  }
+
+  // astro:page-load se dispara en la carga inicial y después de cada navegación
+  document.addEventListener('astro:page-load', setupProductReveal);
 </script>
 
 
